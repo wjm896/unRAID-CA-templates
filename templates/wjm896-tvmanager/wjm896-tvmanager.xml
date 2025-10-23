@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<Container>
+  <Name>TV Manager</Name>
+  <Repository>wjm896/tvmanager:latest</Repository>
+  <Registry>https://hub.docker.com/r/wjm896/tvmanager</Registry>
+  <Network>bridge</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/wjm896/tvmanager/issues</Support>
+  <Project>https://github.com/wjm896/tvmanager</Project>
+  <Category>MediaServer:Tools</Category>
+  <Overview>
+    Automated TV show manager and Sonarr queue cleaner.
+    This tool provides:
+    - A small web UI to manage and monitor processed TV show folders
+    - Automatic PNG (Plex-style artwork) injection into episode directories
+    - Periodic cleanup of Deluge torrents with invalid files or stuck states
+    - Automatic Sonarr queue cleanup for failed/manual items
+  </Overview>
+  <WebUI>http://[IP]:[PORT:5555]</WebUI>
+  <Icon>https://raw.githubusercontent.com/wjm896/tvmanager/main/plex.png</Icon>
+  <ExtraParams></ExtraParams>
+  <PostArgs></PostArgs>
+  <Environment>
+    <Variable>
+      <Name>SONARR_URL</Name>
+      <Value>http://192.168.0.156:8989</Value>
+      <Description>Sonarr base URL</Description>
+    </Variable>
+    <Variable>
+      <Name>SONARR_API_KEY</Name>
+      <Value></Value>
+      <Description>Sonarr API key (required)</Description>
+    </Variable>
+    <Variable>
+      <Name>SONARR_MIN_AGE</Name>
+      <Value>120</Value>
+      <Description>Minimum age (minutes) for failed/manual items before deletion</Description>
+    </Variable>
+    <Variable>
+      <Name>DELUGE_HOST</Name>
+      <Value>192.168.0.156</Value>
+      <Description>Deluge RPC host</Description>
+    </Variable>
+    <Variable>
+      <Name>DELUGE_PORT</Name>
+      <Value>58846</Value>
+      <Description>Deluge RPC port</Description>
+    </Variable>
+    <Variable>
+      <Name>DELUGE_USER</Name>
+      <Value>localclient</Value>
+      <Description>Deluge RPC username</Description>
+    </Variable>
+    <Variable>
+      <Name>DELUGE_PASS</Name>
+      <Value></Value>
+      <Description>Deluge RPC password</Description>
+    </Variable>
+    <Variable>
+      <Name>BASE_DIR</Name>
+      <Value>/tv</Value>
+      <Description>Base directory where TV shows are stored</Description>
+    </Variable>
+    <Variable>
+      <Name>PROCESSED_DIR_FILE</Name>
+      <Value>/data/processed_directories.json</Value>
+      <Description>Path to JSON file storing processed directories</Description>
+    </Variable>
+    <Variable>
+      <Name>PNG_FILE</Name>
+      <Value>plex.png</Value>
+      <Description>Path to the PNG image to inject into episode directories</Description>
+    </Variable>
+  </Environment>
+  <Config Name="TV Shows Folder" Target="/tv" Default="/mnt/user/tv" Mode="rw" Description="TV shows directory" Type="Path" Display="always" Required="true" Mask="false" />
+  <Config Name="Data Folder" Target="/data" Default="/mnt/user/appdata/tvmanager" Mode="rw" Description="Stores app data and processed directories list" Type="Path" Display="always" Required="true" Mask="false" />
+  <Port Name="Web UI" Target="5555" Default="5555" Mode="tcp" Description="Web interface port" Type="Port" Display="always" Required="true" Mask="false" />
+  <DonateText>If you find this tool helpful, consider starring the repo on GitHub ❤️</DonateText>
+</Container>
