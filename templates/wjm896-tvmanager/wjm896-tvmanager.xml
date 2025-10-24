@@ -33,6 +33,5 @@
   <Config Name="App Data Path" Target="/data" Default="/mnt/user/appdata/tvmanager" Mode="path" Description="Path for processed directories and app data" Type="Path" Display="always" Required="true" Mask="false"/>
 
   <!-- Web UI Port -->
-  <Config Name="Container Web Port" Target="WEB_PORT" Default="5555" Mode="env" Description="Port Flask listens on inside container" Type="Port" Display="always" Required="true" Mask="false"/>
   <Config Name="Host Web Port" Target="HOST_WEB_PORT" Default="5555" Mode="Variable" Description="Host port mapped to container Web UI" Type="Port" Display="always" Required="true" Mask="false"/>
 </Container>
