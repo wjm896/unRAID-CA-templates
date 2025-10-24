@@ -9,9 +9,9 @@
   <Privileged>false</Privileged>
   <Support>https://github.com/wjm896/tvmanager/issues</Support>
   <Project>https://github.com/wjm896/tvmanager</Project>
-  <WebUI>http://[IP]:[PORT]</WebUI>
   <Icon>https://raw.githubusercontent.com/wjm896/unraid-templates/main/icons/tvmanager.png</Icon>
   <ExtraParams/>
+
   <Overview>
     TV Manager is a lightweight Python + Flask app that integrates with Sonarr and Deluge to:
     - Automatically clean failed/manual Sonarr queue items
@@ -19,6 +19,7 @@
     - Copy Plex-compatible .png artwork to TV show episodes
     - Provide a web UI to manage processed directories
   </Overview>
+
   <Category>MediaServer:Tools</Category>
 
   <!-- Environment Variables -->
@@ -32,6 +33,8 @@
   <Config Name="TV Shows Path" Target="/tv" Default="/mnt/user/tv" Mode="path" Description="Path to TV show files" Type="Path" Display="always" Required="true" Mask="false"/>
   <Config Name="App Data Path" Target="/data" Default="/mnt/user/appdata/tvmanager" Mode="path" Description="Path for processed directories and app data" Type="Path" Display="always" Required="true" Mask="false"/>
 
-  <!-- Host Port Mapping -->
-  <Config Name="Host Web Port" Target="WEB_PORT_HOST" Default="5555" Mode="Variable" Description="Host port mapped to container Web UI (container listens on 5555)" Type="Port" Display="always" Required="true" Mask="false"/>
+  <!-- Host port mapping (container port fixed at 5555) -->
+  <Config Name="Web UI Host Port" Target="5555" Default="5555" Mode="Port" Description="Host port mapped to container Web UI" Type="Port" Display="always" Required="true" Mask="false"/>
+  <WebUI>http://[IP]:[PORT:5555]/manage</WebUI>
+
 </Container>
