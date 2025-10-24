@@ -32,6 +32,6 @@
   <Config Name="TV Shows Path" Target="/tv" Default="/mnt/user/tv" Mode="path" Description="Path to TV show files" Type="Path" Display="always" Required="true" Mask="false"/>
   <Config Name="App Data Path" Target="/data" Default="/mnt/user/appdata/tvmanager" Mode="path" Description="Path for processed directories and app data" Type="Path" Display="always" Required="true" Mask="false"/>
 
-  <!-- Web UI Port -->
-  <Config Name="Host Web Port" Target="HOST_WEB_PORT" Default="5555" Mode="Variable" Description="Host port mapped to container Web UI" Type="Port" Display="always" Required="true" Mask="false"/>
+  <!-- Host Port Mapping -->
+  <Config Name="Host Web Port" Target="WEB_PORT_HOST" Default="5555" Mode="Variable" Description="Host port mapped to container Web UI (container listens on 5555)" Type="Port" Display="always" Required="true" Mask="false"/>
 </Container>
