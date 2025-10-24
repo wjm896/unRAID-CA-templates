@@ -4,76 +4,35 @@
   <Repository>wjm896/tvmanager:latest</Repository>
   <Registry>https://hub.docker.com/r/wjm896/tvmanager</Registry>
   <Network>bridge</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/wjm896/tvmanager/issues</Support>
   <Project>https://github.com/wjm896/tvmanager</Project>
-  <Category>MediaServer:Tools</Category>
+  <WebUI>http://[IP]:[PORT]</WebUI>
+  <Icon>https://raw.githubusercontent.com/wjm896/unraid-templates/main/icons/tvmanager.png</Icon>
+  <ExtraParams/>
   <Overview>
-    Automated TV show manager and Sonarr queue cleaner.
-    This tool provides:
-    - A small web UI to manage and monitor processed TV show folders
-    - Automatic PNG (Plex-style artwork) injection into episode directories
-    - Periodic cleanup of Deluge torrents with invalid files or stuck states
-    - Automatic Sonarr queue cleanup for failed/manual items
+    TV Manager is a lightweight Python + Flask app that integrates with Sonarr and Deluge to:
+    - Automatically clean failed/manual Sonarr queue items
+    - Remove unwanted Deluge torrents
+    - Copy Plex-compatible .png artwork to TV show episodes
+    - Provide a web UI to manage processed directories
   </Overview>
-  <WebUI>http://[IP]:[PORT:5555]</WebUI>
-  <Icon>https://raw.githubusercontent.com/wjm896/tvmanager/main/plex.png</Icon>
-  <ExtraParams></ExtraParams>
-  <PostArgs></PostArgs>
-  <Environment>
-    <Variable>
-      <Name>SONARR_URL</Name>
-      <Value>http://192.168.0.156:8989</Value>
-      <Description>Sonarr base URL</Description>
-    </Variable>
-    <Variable>
-      <Name>SONARR_API_KEY</Name>
-      <Value></Value>
-      <Description>Sonarr API key (required)</Description>
-    </Variable>
-    <Variable>
-      <Name>SONARR_MIN_AGE</Name>
-      <Value>120</Value>
-      <Description>Minimum age (minutes) for failed/manual items before deletion</Description>
-    </Variable>
-    <Variable>
-      <Name>DELUGE_HOST</Name>
-      <Value>192.168.0.156</Value>
-      <Description>Deluge RPC host</Description>
-    </Variable>
-    <Variable>
-      <Name>DELUGE_PORT</Name>
-      <Value>58846</Value>
-      <Description>Deluge RPC port</Description>
-    </Variable>
-    <Variable>
-      <Name>DELUGE_USER</Name>
-      <Value>localclient</Value>
-      <Description>Deluge RPC username</Description>
-    </Variable>
-    <Variable>
-      <Name>DELUGE_PASS</Name>
-      <Value></Value>
-      <Description>Deluge RPC password</Description>
-    </Variable>
-    <Variable>
-      <Name>BASE_DIR</Name>
-      <Value>/tv</Value>
-      <Description>Base directory where TV shows are stored</Description>
-    </Variable>
-    <Variable>
-      <Name>PROCESSED_DIR_FILE</Name>
-      <Value>/data/processed_directories.json</Value>
-      <Description>Path to JSON file storing processed directories</Description>
-    </Variable>
-    <Variable>
-      <Name>PNG_FILE</Name>
-      <Value>plex.png</Value>
-      <Description>Path to the PNG image to inject into episode directories</Description>
-    </Variable>
-  </Environment>
-  <Config Name="TV Shows Folder" Target="/tv" Default="/mnt/user/tv" Mode="rw" Description="TV shows directory" Type="Path" Display="always" Required="true" Mask="false" />
-  <Config Name="Data Folder" Target="/data" Default="/mnt/user/appdata/tvmanager" Mode="rw" Description="Stores app data and processed directories list" Type="Path" Display="always" Required="true" Mask="false" />
-  <Port Name="Web UI" Target="5555" Default="5555" Mode="tcp" Description="Web interface port" Type="Port" Display="always" Required="true" Mask="false" />
-  <DonateText>If you find this tool helpful, consider starring the repo on GitHub ❤️</DonateText>
+  <Category>MediaServer:Tools</Category>
+
+  <!-- Environment Variables -->
+  <Config Name="Sonarr URL" Target="SONARR_URL" Default="http://192.168.0.156:8989" Mode="env" Description="Sonarr base URL" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Sonarr API Key" Target="SONARR_API_KEY" Default="" Mode="env" Description="Sonarr API key" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Sonarr Minimum Age (minutes)" Target="SONARR_MIN_AGE" Default="120" Mode="env" Description="Minimum age of failed/manual items before removal" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Deluge Host" Target="DELUGE_HOST" Default="192.168.0.156" Mode="env" Description="Deluge RPC host" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Deluge Port" Target="DELUGE_PORT" Default="58846" Mode="env" Description="Deluge RPC port" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Deluge Username" Target="DELUGE_USER" Default="localclient" Mode="env" Description="Deluge RPC username" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Deluge Password" Target="DELUGE_PASS" Default="" Mode="env" Description="Deluge RPC password" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="TV Shows Path" Target="/tv" Default="/mnt/user/tv" Mode="path" Description="Path to TV show files" Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="App Data Path" Target="/data" Default="/mnt/user/appdata/tvmanager" Mode="path" Description="Path for processed directories and app data" Type="Path" Display="always" Required="true" Mask="false"/>
+
+  <!-- Web UI Port -->
+  <Config Name="Container Web Port" Target="WEB_PORT" Default="5555" Mode="env" Description="Port Flask listens on inside container" Type="Port" Display="always" Required="true" Mask="false"/>
+  <Config Name="Host Web Port" Target="HOST_WEB_PORT" Default="5555" Mode="Variable" Description="Host port mapped to container Web UI" Type="Port" Display="always" Required="true" Mask="false"/>
 </Container>
