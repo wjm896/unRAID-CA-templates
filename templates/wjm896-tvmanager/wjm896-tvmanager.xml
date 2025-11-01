@@ -25,6 +25,7 @@
   <!-- Environment Variables -->
   <Config Name="Sonarr URL" Target="SONARR_URL" Default="http://192.168.0.156:8989" Mode="env" Description="Sonarr base URL" Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Sonarr API Key" Target="SONARR_API_KEY" Default="" Mode="env" Description="Sonarr API key" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Deluge label Allowlist" Target="LABEL_ALLOWLIST" Default="" Mode="env" Description="Comma separated list of labels to check on Deluge.  Empty value will check all torrents" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Sonarr Minimum Age (minutes)" Target="SONARR_MIN_AGE" Default="120" Mode="env" Description="Minimum age of failed/manual items before removal" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Deluge Host" Target="DELUGE_HOST" Default="192.168.0.156" Mode="env" Description="Deluge RPC host" Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Deluge Port" Target="DELUGE_PORT" Default="58846" Mode="env" Description="Deluge RPC port" Type="Variable" Display="always" Required="true" Mask="false"/>
